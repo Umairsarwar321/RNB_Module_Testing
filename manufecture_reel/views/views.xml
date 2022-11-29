@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="mrp_form_inherit_id" model="ir.ui.view">
+            <field name="name">MRP Inherit</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+
+                <!--adding extra fields into manfacturing form view-->
+                <xpath expr="//field[@name='bom_id']" position="after">
+                    <field name="production_in_meters"/>
+                    <field name="no_of_reels"/>
+                </xpath>
+                <!--this is reel button which create reels-->
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <button type="object" name="create_reel" string="Reel" class="oe_highlight"/>
+                </xpath>
+
+                <!--this section defile reel detail tab-->
+                <xpath expr="//page[@name='miscellaneous']" position="after">
+                    <page string="Reel Detail" name="reel_detail">
+                        <field name="reel_detail_ids">
+                            <tree string="Reels">
+                                <field name="sequence_no"/>
+                                <field name="worker_id"/>
+                                <field name="weight"/>
+                                <field name="description"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>
